@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Countdown to NCEE</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <div class="container">
+             <h2><span>Countdown to NCEE</span> 2024</h2>
+             <div class="countdown">
+                 <div id="day">NA</div>
+                 <div id="hour">NA</div>
+                 <div id="minute">NA</div>
+                 <div id="second">NA</div>
+             </div>
+         </div>
+
+    </body>
+</html>
+<script type="text/javascript">
+    //得到高考时间
+    function getEndTime(myYear){
+        var myEndTime = new Date(''+myYear+'/06/07 00:00:00');
+        return myEndTime;
+    }
+
+    //倒计时
+    function countDown(){
+        var mydate = new Date();
+        var year = '2024';
+        var EndTime = getEndTime(year);
+        var NowTime = new Date();
+        //处理现在日期在高考日期之后的情况
+        if( (EndTime.getTime() - NowTime.getTime() ) < 0){
+            year = mydate.getFullYear() + 1;
+            EndTime = getEndTime(year);
+        }
+        //现在的时间到高考相差的时间
+        var t = EndTime.getTime() - NowTime.getTime();
+
+
+        //计算天数
+        var d=Math.floor(t/1000/60/60/24);
+        //计算小时数
+        var h=Math.floor(t/1000/60/60%24);
+        //计算分钟数
+        var m=Math.floor(t/1000/60%60);
+        //计算秒数
+        var s=Math.floor(t/1000%60);
+
+        //查找day这一id
+        document.getElementById('day').innerText = d;
+        //查找hour这一id
+        document.getElementById('hour').innerText = h;
+        //查找minute这一id
+        document.getElementById('minute').innerText = m;
+        //查找second这一id
+        document.getElementById('second').innerText = s;
+    } 
+    //setInterval定时器
+    setInterval(countDown,1000);
+</script>
+
